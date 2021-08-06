@@ -1,0 +1,21 @@
+package mongodb;
+
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoDatabase;
+
+public class ConnectToDB {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		MongoClient mongoclients =  MongoClients.create("mongodb://192.168.56.100:27017");
+		MongoDatabase dbase = mongoclients.getDatabase("my-db");
+		System.out.println("Database Name: "+dbase.getName());
+		for(String name:dbase.listCollectionNames()) {
+			System.out.println("Collection: " + name);
+		}
+		
+	}
+
+}

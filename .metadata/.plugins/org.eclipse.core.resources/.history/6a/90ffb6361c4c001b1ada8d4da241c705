@@ -1,0 +1,12 @@
+package mongodb;
+
+public class ConnectToDB {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		MongoClients mongoclients =  MongoClients.create("mongodb://http://192.168.56.100:27017");
+		System.out.println("Hello");
+	}
+
+}

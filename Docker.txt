@@ -1,0 +1,41 @@
+ docker-machine  rm default
+ docker-machine ls
+ docker-machine create -d virtualbox --virtualbox-hostonly-cidr 192.168.56.1/24 default
+
+$ docker-machine ls
+NAME      ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER      ERRORS
+default   -        virtualbox   Running   tcp://192.168.56.101:2376           v19.03.12
+
+Error: 
+$ docker run hello-world
+C:\Program Files\Docker Toolbox\docker.exe: error during connect: Post http://%2F%2F.%2Fpipe%2Fdocker_engine/v1.40/containers/create: open //./pipe/docker_engine: The system cannot find the file specified. In the default daemon configuration on Windows, the docker client must be run elevated to connect. This error may also indicate that the docker daemon is not running.
+See 'C:\Program Files\Docker Toolbox\docker.exe run --help'.
+
+on cmd:
+$ docker-machine env --shell cmd default
+SET DOCKER_TLS_VERIFY=1
+SET DOCKER_HOST=tcp://192.168.56.102:2376
+SET DOCKER_CERT_PATH=C:\Users\RA20159338\.docker\machine\machines\default
+SET DOCKER_MACHINE_NAME=default
+SET COMPOSE_CONVERT_WINDOWS_PATHS=true
+REM Run this command to configure your shell:
+REM     @FOR /f "tokens=*" %i IN ('"C:\Program Files\Docker Toolbox\docker-machine.exe" env --shell cmd default') DO @%i
+
+on gitbash:
+$ docker-machine env default
+export DOCKER_TLS_VERIFY="1"
+export DOCKER_HOST="tcp://192.168.56.102:2376"
+export DOCKER_CERT_PATH="C:\Users\RA20159338\.docker\machine\machines\default"
+export DOCKER_MACHINE_NAME="default"
+export COMPOSE_CONVERT_WINDOWS_PATHS="true"
+# Run this command to configure your shell:
+# eval $("C:\Program Files\Docker Toolbox\docker-machine.exe" env default)
+
+
+Error: 
+$ docker run hello-world
+Unable to find image 'hello-world:latest' locally
+C:\Program Files\Docker Toolbox\docker.exe: Error response from daemon: Get https://registry-1.docker.io/v2/: dial tcp: lookup registry-1.docker.io on 10.0.2.3:53: no such host.
+See 'C:\Program Files\Docker Toolbox\docker.exe run --help'.
+
+Exited from Telstra VPN

@@ -1,0 +1,40 @@
+package mongodb;
+
+import java.util.ArrayList;
+
+import org.bson.Document;
+
+import com.mongodb.MongoCommandException;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.MongoIterable;
+
+public class ConnectToDB {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		MongoClient mongoclients =  MongoClients.create("mongodb://admin:password@192.168.56.100:27017");
+		MongoDatabase dbase = mongoclients.getDatabase("my-db");
+		System.out.println("Database Name: "+dbase.getName());
+		
+		try{
+		dbase.createCollection("users");
+		System.out.println("Collection users created");
+		} catch(MongoCommandException ex) {
+			dbase.getCollection("users").drop();
+		}
+		
+		MongoCollection<Document> coll = dbase.getCollection("users");
+		ArrayList<Document> docs = new ArrayList<Document>();
+		
+		Document doc1 = new Document();
+		doc1.append("id", 1);
+		doc1.append("firstName", "Rajni");
+		doc1.append("lastName",	"Saluja");		
+		docs.add(doc1);
+		
+		
+	}
+}

@@ -1,0 +1,32 @@
+package mongodb;
+
+import com.mongodb.MongoCommandException;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.MongoIterable;
+
+public class ConnectToDB {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		MongoClient mongoclients =  MongoClients.create("mongodb://admin:password@192.168.56.100:27017");
+		MongoDatabase dbase = mongoclients.getDatabase("my-db");
+		System.out.println("Database Name: "+dbase.getName());
+		
+		try {		
+			dbase.createCollection("Users");
+			System.out.println("Users collection created successfully");
+		}
+		catch(MongoCommandException ex) {
+			System.out.println("exception occured: "+ex.toString());
+		}
+		
+		for(String name:dbase.listCollectionNames()) {
+			System.out.println("Collection: " + name);
+			
+		}
+		
+	}
+
+}
